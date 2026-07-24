@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>PocketVC | AI Lead Response & Viewing Operator</title>
+  <meta name="description" content="Private demo page for PocketVC's AI Lead Response & Viewing Operator for Dubai real estate teams." />
+
+  <!-- GA4 placeholder: replace G-XXXXXXX with your ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXX');
+  </script>
+
+  <!-- Microsoft Clarity placeholder: replace CLARITY_ID with your ID -->
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "CLARITY_ID");
+  </script>
+
+  <style>
+    :root{
+      --bg:#070809;
+      --panel:#0f1115;
+      --panel2:#11141b;
+      --text:#f4f1ea;
+      --muted:#b1aa9f;
+      --line:rgba(244,241,234,.14);
+      --line2:rgba(244,241,234,.08);
+      --gold:#d6b979;
+      --gold2:#8e7642;
+      --blue:#8fb7ff;
+      --green:#a9d6a4;
+      --danger:#ffb3a7;
+      --shadow:0 24px 80px rgba(0,0,0,.48);
+      --radius:24px;
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(214,185,121,.17), transparent 34%),
+        radial-gradient(circle at 82% 18%, rgba(143,183,255,.13), transparent 32%),
+        linear-gradient(180deg, #070809 0%, #0a0c10 42%, #070809 100%);
+      overflow-x:hidden;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.34;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(7,8,9,.72);
+      border-bottom:1px solid var(--line2);
+    }
+    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:760;letter-spacing:-.03em}
+    .mark{width:34px;height:34px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;color:var(--gold);background:linear-gradient(135deg, rgba(214,185,121,.18), rgba(255,255,255,.03))}
+    .navlinks{display:flex;align-items:center;gap:22px;color:var(--muted);font-size:13px}
+    .navlinks a:hover{color:var(--text)}
+    .mini-cta{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(214,185,121,.45);color:#120f09;background:var(--gold);padding:10px 14px;border-radius:999px;font-size:13px;font-weight:720;box-shadow:0 10px 26px rgba(214,185,121,.12)}
+
+    .hero{padding:84px 0 58px}
+    .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:44px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--gold);font-size:12px;font-weight:720;letter-spacing:.08em;text-transform:uppercase;background:rgba(214,185,121,.06)}
+    h1{font-size:clamp(44px, 6vw, 80px);line-height:.94;letter-spacing:-.075em;margin:18px 0 20px;max-width:780px}
+    .sub{font-size:clamp(18px, 2vw, 24px);line-height:1.35;color:#d8d2c8;max-width:650px;margin:0 0 26px;letter-spacing:-.025em}
+    .promise{display:flex;align-items:center;gap:12px;margin:26px 0;padding:16px 18px;border:1px solid rgba(214,185,121,.26);background:rgba(214,185,121,.08);border-radius:18px;max-width:570px}
+    .promise strong{font-size:18px;letter-spacing:-.035em}
+    .promise span{color:var(--muted);font-size:14px}
+    .dot{width:10px;height:10px;border-radius:99px;background:var(--gold);box-shadow:0 0 0 7px rgba(214,185,121,.12)}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin:30px 0 24px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:50px;padding:14px 18px;border-radius:999px;border:1px solid var(--line);font-size:14px;font-weight:760;cursor:pointer;transition:.18s ease;background:rgba(255,255,255,.04)}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(244,241,234,.28);background:rgba(255,255,255,.07)}
+    .btn.primary{background:var(--text);color:#08090b;border-color:var(--text)}
+    .btn.gold{background:var(--gold);color:#111;border-color:var(--gold)}
+    .btn.ghost{color:var(--text)}
+    .proofline{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:14px;line-height:1.45;max-width:660px}
+    .proofline b{color:var(--text);font-weight:720}
+
+    .hero-card{position:relative;padding:18px;border:1px solid var(--line);border-radius:34px;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025));box-shadow:var(--shadow);overflow:hidden}
+    .hero-card:before{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at 80% 0%, rgba(214,185,121,.24), transparent 38%);pointer-events:none}
+    .operator-panel{position:relative;border:1px solid var(--line2);border-radius:26px;background:rgba(10,12,16,.86);padding:22px;min-height:520px}
+    .panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+    .chip{font-size:12px;color:var(--gold);border:1px solid rgba(214,185,121,.22);background:rgba(214,185,121,.06);border-radius:999px;padding:7px 10px;font-weight:720}
+    .status{display:flex;gap:7px;align-items:center;color:var(--muted);font-size:12px}
+    .pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px rgba(169,214,164,.11)}
+    .lead-card{background:linear-gradient(180deg, rgba(244,241,234,.08), rgba(244,241,234,.035));border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:14px}
+    .lead-title{font-size:13px;color:var(--muted);margin-bottom:6px}
+    .lead-main{font-size:24px;line-height:1.05;font-weight:780;letter-spacing:-.045em}
+    .call-row{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line2)}
+    .call-row:last-child{border-bottom:0}
+    .icon{width:42px;height:42px;border-radius:15px;background:rgba(214,185,121,.1);border:1px solid rgba(214,185,121,.18);display:grid;place-items:center;color:var(--gold);font-weight:900}
+    .row-title{font-size:15px;font-weight:720;margin-bottom:3px;letter-spacing:-.02em}
+    .row-copy{font-size:13px;color:var(--muted);line-height:1.38}
+    .summary-mini{margin-top:18px;border:1px solid rgba(143,183,255,.18);border-radius:20px;background:rgba(143,183,255,.055);padding:16px}
+    .summary-mini h3{margin:0 0 10px;font-size:14px;color:var(--blue)}
+    .summary-tags{display:flex;flex-wrap:wrap;gap:8px}
+    .summary-tags span{font-size:12px;color:#dbe8ff;border:1px solid rgba(143,183,255,.22);background:rgba(143,183,255,.06);padding:7px 9px;border-radius:999px}
+
+    section{padding:54px 0}
+    .section-head{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:22px}
+    h2{font-size:clamp(30px,4vw,50px);line-height:1.02;letter-spacing:-.06em;margin:0;max-width:760px}
+    .section-kicker{color:var(--gold);font-size:12px;font-weight:780;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+    .section-sub{color:var(--muted);font-size:16px;line-height:1.5;max-width:520px;margin:0}
+
+    .demo-section{padding-top:24px}
+    .demo-card{display:grid;grid-template-columns:.95fr 1.05fr;gap:24px;border:1px solid rgba(214,185,121,.24);background:linear-gradient(135deg, rgba(214,185,121,.12), rgba(255,255,255,.035) 36%, rgba(143,183,255,.07));border-radius:34px;padding:24px;box-shadow:var(--shadow)}
+    .audio-box{border-radius:26px;background:rgba(7,8,9,.62);border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;justify-content:space-between;min-height:380px}
+    .audio-box h2{font-size:clamp(32px,4vw,54px)}
+    .audio-label{color:var(--muted);font-size:13px;line-height:1.5;margin:12px 0 20px}
+    audio{width:100%;height:44px;filter:invert(1) hue-rotate(180deg) saturate(.75);margin:6px 0 20px}
+    .demo-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+    .after-audio{display:none;margin-top:14px;padding:12px 14px;border-radius:16px;border:1px solid rgba(169,214,164,.22);background:rgba(169,214,164,.075);color:#dff3dc;font-size:14px;line-height:1.42}
+    .after-audio.visible{display:block}
+    .transcript{border-radius:26px;background:rgba(7,8,9,.45);border:1px solid var(--line);padding:20px}
+    details{border-bottom:1px solid var(--line2);padding-bottom:16px;margin-bottom:16px}
+    summary{cursor:pointer;font-weight:760;color:var(--text);list-style:none;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"+";color:var(--gold);font-size:22px}
+    details[open] summary:after{content:"–"}
+    .dialogue{margin-top:16px;display:grid;gap:12px;color:#d9d4ca;font-size:14px;line-height:1.48}
+    .line{padding:12px 13px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid var(--line2)}
+    .line b{display:block;color:var(--gold);font-size:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+    .sales-summary h3{margin:0 0 12px;font-size:15px;color:var(--blue);letter-spacing:-.02em}
+    .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .summary-item{padding:12px;border:1px solid var(--line2);background:rgba(255,255,255,.035);border-radius:15px}
+    .summary-item span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+    .summary-item b{font-size:14px;font-weight:720}
+
+    .metrics{display:grid;grid-template-columns:repeat(3, 1fr);gap:14px}
+    .metric{padding:24px;border:1px solid var(--line);background:rgba(255,255,255,.045);border-radius:24px;min-height:190px}
+    .metric .num{font-size:56px;line-height:.9;font-weight:850;letter-spacing:-.075em;color:var(--gold);margin-bottom:18px}
+    .metric h3{margin:0 0 8px;font-size:17px;letter-spacing:-.025em}
+    .metric p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
+
+    .problem-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:22px;align-items:start}
+    .problem-copy{padding:26px;border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.04)}
+    .problem-copy p{color:var(--muted);line-height:1.55;font-size:16px;margin:0}
+    .leaks{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .leak{padding:16px;border:1px solid var(--line2);border-radius:18px;background:rgba(255,255,255,.035);color:#dfd9cf;font-size:14px;display:flex;gap:10px;align-items:flex-start}
+    .leak:before{content:"";width:8px;height:8px;margin-top:6px;border-radius:99px;background:var(--danger);box-shadow:0 0 0 5px rgba(255,179,167,.08);flex:0 0 auto}
+
+    .workflow{border:1px solid var(--line);border-radius:30px;background:rgba(255,255,255,.035);padding:22px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .step{position:relative;border:1px solid var(--line2);border-radius:20px;background:rgba(7,8,9,.45);padding:18px;min-height:120px}
+    .step:not(:last-child):after{content:"→";position:absolute;right:-14px;top:42%;color:var(--gold);font-weight:900;z-index:2}
+    .step small{display:block;color:var(--gold);font-weight:800;margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase;font-size:11px}
+    .step b{display:block;font-size:15px;line-height:1.22;letter-spacing:-.02em}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .cap-card{padding:26px;border:1px solid var(--line);border-radius:28px;background:rgba(255,255,255,.04)}
+    .cap-card h3{font-size:28px;line-height:1.05;letter-spacing:-.05em;margin:0 0 18px}
+    .cap-card ul{padding:0;margin:0;list-style:none;display:grid;gap:12px}
+    .cap-card li{color:#ded8cf;font-size:14px;line-height:1.36;display:flex;gap:10px;align-items:flex-start}
+    .cap-card li:before{content:"→";color:var(--gold);font-weight:800;flex:0 0 auto}
+
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{padding:20px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.04);min-height:140px}
+    .card h3{margin:0 0 9px;font-size:18px;letter-spacing:-.03em}
+    .card p{margin:0;color:var(--muted);font-size:14px;line-height:1.45}
+
+    .cred{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:stretch}
+    .cred-main{padding:28px;border-radius:30px;border:1px solid rgba(214,185,121,.22);background:linear-gradient(135deg, rgba(214,185,121,.11), rgba(255,255,255,.035))}
+    .cred-main h2{font-size:clamp(30px, 4vw, 48px)}
+    .cred-main p{color:var(--muted);line-height:1.55;font-size:16px;margin:18px 0 0}
+    .cred-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .cred-item{padding:16px;border-radius:18px;border:1px solid var(--line2);background:rgba(255,255,255,.035);font-size:14px;color:#dfd9cf}
+
+    .sprint{border:1px solid rgba(143,183,255,.22);border-radius:34px;background:linear-gradient(135deg, rgba(143,183,255,.09), rgba(255,255,255,.035));padding:28px}
+    .sprint-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:26px;align-items:start}
+    .sprint h2{font-size:clamp(34px, 5vw, 58px)}
+    .sprint p{color:var(--muted);line-height:1.5;font-size:16px}
+    .sprint-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+    .sprint-col{border:1px solid var(--line2);border-radius:22px;background:rgba(7,8,9,.42);padding:18px}
+    .sprint-col h3{margin:0 0 14px;font-size:16px;color:var(--blue)}
+    .sprint-col ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+    .sprint-col li{color:#ded8cf;font-size:13px;line-height:1.35;display:flex;gap:9px}
+    .sprint-col li:before{content:"•";color:var(--blue)}
+
+    .final{padding:64px 0 96px}
+    .final-box{text-align:center;border:1px solid rgba(214,185,121,.24);border-radius:38px;background:linear-gradient(180deg, rgba(214,185,121,.12), rgba(255,255,255,.035));padding:48px 24px;box-shadow:var(--shadow)}
+    .final-box h2{margin:0 auto 14px;max-width:820px}
+    .final-box p{color:var(--muted);max-width:640px;margin:0 auto 26px;line-height:1.52}
+
+    footer{border-top:1px solid var(--line2);padding:28px 0;color:var(--muted);font-size:13px}
+    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+    .mobile-cta{display:none;position:fixed;left:14px;right:14px;bottom:14px;z-index:60;border:1px solid rgba(244,241,234,.2);background:rgba(7,8,9,.82);backdrop-filter:blur(16px);border-radius:999px;padding:8px;box-shadow:0 18px 60px rgba(0,0,0,.4)}
+    .mobile-cta a{width:100%}
+
+    @media (max-width: 980px){
+      .hero-grid,.demo-card,.problem-grid,.cred,.sprint-grid{grid-template-columns:1fr}
+      .operator-panel{min-height:auto}
+      .workflow{grid-template-columns:1fr 1fr 1fr}
+      .step:nth-child(3):after{display:none}
+      .metrics{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr 1fr}
+      .navlinks{display:none}
+    }
+    @media (max-width: 680px){
+      .wrap{padding:0 16px}
+      .nav{height:64px}
+      .hero{padding:56px 0 34px}
+      h1{font-size:47px;letter-spacing:-.07em}
+      .sub{font-size:18px}
+      .promise{align-items:flex-start}
+      .actions .btn{width:100%}
+      .demo-card,.hero-card,.sprint,.final-box{border-radius:26px;padding:16px}
+      .audio-box,.transcript{border-radius:22px;padding:18px}
+      .summary-grid,.leaks,.split,.cards,.cred-list,.sprint-cols{grid-template-columns:1fr}
+      .workflow{grid-template-columns:1fr}
+      .step:after{display:none!important}
+      .metric{min-height:auto}
+      .metric .num{font-size:48px}
+      section{padding:40px 0}
+      .section-head{display:block}
+      .section-sub{margin-top:14px}
+      .mobile-cta{display:flex}
+      footer{padding-bottom:92px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="PocketVC home">
+        <span class="mark">P</span>
+        <span>PocketVC</span>
+      </a>
+      <nav class="navlinks" aria-label="Page navigation">
+        <a href="#demo">Demo</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#sprint">14-Day Sprint</a>
+      </nav>
+      <a class="mini-cta js-calendly" href="https://calendly.com/pocketvc/30min" data-event="calendly_click">Book call</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Private demo · Dubai real estate</span>
+          <h1>AI Lead Response & Viewing Operator</h1>
+          <p class="sub">Calls, qualifies, follows up, and books viewings before buyer leads go cold.</p>
+
+          <div class="promise">
+            <span class="dot"></span>
+            <div>
+              <strong>Not a single lead gets missed.</strong><br />
+              <span>Every inquiry is called, qualified, followed up, booked, or disqualified.</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="btn gold js-scroll-demo" href="#demo" data-event="cta_click">▶ Listen to 90-second demo</a>
+            <a class="btn ghost js-calendly" href="https://calendly.com/pocketvc/30min" data-event="calendly_click">Book a 20-minute workflow call</a>
+          </div>
+
+          <div class="proofline">
+            <span>—</span>
+            <span>Built by <b>PocketVC</b>, a Palo Alto venture studio with <b>30+ AI agents deployed</b> across real estate, construction, and operations workflows.</span>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="AI operator preview">
+          <div class="operator-panel">
+            <div class="panel-top">
+              <span class="chip">Live lead flow</span>
+              <span class="status"><span class="pulse"></span> AI operator active</span>
+            </div>
+
+            <div class="lead-card">
+              <div class="lead-title">New buyer inquiry</div>
+              <div class="lead-main">2BR furnished · Dubai Marina · AED 180k/year</div>
+            </div>
+
+            <div class="call-row">
+              <div class="icon">1</div>
+              <div>
+                <div class="row-title">AI calls within seconds</div>
+                <div class="row-copy">No waiting for manual agent response.</div>
+              </div>
+            </div>
+            <div class="call-row">
+              <div class="icon">2</div>
+              <div>
+                <div class="row-title">Qualifies intent</div>
+                <div class="row-copy">Budget, location, property type, timeline, and readiness.</div>
+              </div>
+            </div>
+            <div class="call-row">
+              <div class="icon">3</div>
+              <div>
+                <div class="row-title">Books viewing</div>
+                <div class="row-copy">Qualified buyers move directly into a scheduled next step.</div>
+              </div>
+            </div>
+
+            <div class="summary-mini">
+              <h3>Sales handoff</h3>
+              <div class="summary-tags">
+                <span>Qualified buyer</span>
+                <span>Viewing booked</span>
+                <span>Priority: high</span>
+                <span>WhatsApp follow-up</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+      <div class="wrap">
+        <div class="demo-card">
+          <div class="audio-box">
+            <div>
+              <div class="section-kicker">Demo first</div>
+              <h2>Listen to how the AI handles a buyer lead</h2>
+              <p class="audio-label">A sample Dubai real estate lead flow: instant callback, qualification, viewing booking, and sales handoff. Demo based on a real lead flow. Client and buyer details anonymized.</p>
+              <audio id="demoAudio" controls preload="none">
+                <source src="assets/demo-call.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+            <div>
+              <div class="demo-actions">
+                <a class="btn primary js-calendly" href="https://calendly.com/pocketvc/30min" data-event="calendly_click">Book a workflow call</a>
+                <a class="btn ghost js-sprint" href="mailto:chinara@pocketstudio.vc?subject=14-Day%20AI%20Lead%20Response%20Sprint%20Scope" data-event="sprint_scope_click">Request sprint scope</a>
+              </div>
+              <div class="after-audio" id="afterAudio">Want to see this workflow for <span data-company>your company</span>?</div>
+            </div>
+          </div>
+
+          <div class="transcript">
+            <details id="transcriptDetails">
+              <summary>Read transcript preview</summary>
+              <div class="dialogue">
+                <div class="line"><b>AI Operator</b>Hi, this is the viewing assistant calling about your inquiry for a 2-bedroom apartment in Dubai Marina. Is now a good time?</div>
+                <div class="line"><b>Buyer</b>Yes, sure.</div>
+                <div class="line"><b>AI Operator</b>Great. Are you looking to rent or buy?</div>
+                <div class="line"><b>Buyer</b>Rent.</div>
+                <div class="line"><b>AI Operator</b>What is your preferred budget?</div>
+                <div class="line"><b>Buyer</b>Around AED 180,000 per year.</div>
+                <div class="line"><b>AI Operator</b>Furnished or unfurnished?</div>
+                <div class="line"><b>Buyer</b>Furnished. Looking to move next month.</div>
+                <div class="line"><b>AI Operator</b>Would you prefer a viewing tomorrow at 4 PM or Saturday at 11 AM?</div>
+                <div class="line"><b>Buyer</b>Saturday at 11 works.</div>
+              </div>
+            </details>
+
+            <div class="sales-summary">
+              <h3>Generated sales summary</h3>
+              <div class="summary-grid">
+                <div class="summary-item"><span>Lead</span><b>Qualified buyer</b></div>
+                <div class="summary-item"><span>Location</span><b>Dubai Marina</b></div>
+                <div class="summary-item"><span>Unit</span><b>2BR furnished</b></div>
+                <div class="summary-item"><span>Budget</span><b>AED 180,000/year</b></div>
+                <div class="summary-item"><span>Timeline</span><b>Next month</b></div>
+                <div class="summary-item"><span>Next step</span><b>Viewing booked</b></div>
+                <div class="summary-item"><span>Priority</span><b>High</b></div>
+                <div class="summary-item"><span>Handoff</span><b>Send matching options</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap problem-grid">
+        <div class="problem-copy">
+          <div class="section-kicker">The leak</div>
+          <h2>Lead volume is not always the problem. Lead leakage is.</h2>
+          <p>Dubai real estate teams lose revenue when buyer inquiries are missed, answered late, or followed up inconsistently.</p>
+        </div>
+        <div class="leaks" aria-label="Common lead leakage points">
+          <div class="leak">Missed inbound calls</div>
+          <div class="leak">Slow WhatsApp replies</div>
+          <div class="leak">No follow-up after first contact</div>
+          <div class="leak">Sales time wasted on unqualified buyers</div>
+          <div class="leak">Viewings not confirmed</div>
+          <div class="leak">Old leads never reactivated</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Why speed matters</div>
+            <h2>Small delays become lost revenue.</h2>
+          </div>
+          <p class="section-sub">The operator protects the first minutes after inquiry, when buyer intent is highest.</p>
+        </div>
+        <div class="metrics">
+          <div class="metric">
+            <div class="num">21x</div>
+            <h3>5 minutes vs. 30 minutes</h3>
+            <p>Difference in lead qualification odds, according to lead-response research.</p>
+          </div>
+          <div class="metric">
+            <div class="num">24/7</div>
+            <h3>Inbound + outbound coverage</h3>
+            <p>After-hours calls, instant callbacks, missed-call recovery, and follow-up.</p>
+          </div>
+          <div class="metric">
+            <div class="num">0</div>
+            <h3>Missed leads as the target</h3>
+            <p>Every inquiry is called, qualified, followed up, booked, or disqualified.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Workflow</div>
+            <h2>From inquiry to sales handoff.</h2>
+          </div>
+          <p class="section-sub">The AI handles the first layer. Your sales team closes serious buyers.</p>
+        </div>
+        <div class="workflow">
+          <div class="step"><small>01</small><b>Lead comes in</b></div>
+          <div class="step"><small>02</small><b>AI calls within seconds</b></div>
+          <div class="step"><small>03</small><b>Qualifies buyer</b></div>
+          <div class="step"><small>04</small><b>Books viewing</b></div>
+          <div class="step"><small>05</small><b>Follows up on WhatsApp</b></div>
+          <div class="step"><small>06</small><b>Sends summary to sales</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div class="cap-card">
+          <h3>Inbound</h3>
+          <ul>
+            <li>Answers buyer and tenant calls</li>
+            <li>Handles missed calls</li>
+            <li>Responds by phone and WhatsApp</li>
+            <li>Qualifies before sales involvement</li>
+            <li>Escalates serious leads</li>
+          </ul>
+        </div>
+        <div class="cap-card">
+          <h3>Outbound</h3>
+          <ul>
+            <li>Calls new leads within seconds</li>
+            <li>Follows up until answered</li>
+            <li>Revives old leads</li>
+            <li>Confirms viewings</li>
+            <li>Reduces no-shows</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Use cases</div>
+            <h2>Where it fits.</h2>
+          </div>
+        </div>
+        <div class="cards">
+          <div class="card"><h3>Portal leads</h3><p>Calls new Property Finder, Bayut, Dubizzle, website, or ad leads quickly.</p></div>
+          <div class="card"><h3>WhatsApp inquiries</h3><p>Keeps conversations moving when agents are busy.</p></div>
+          <div class="card"><h3>Missed calls</h3><p>Calls back buyers after hours or when the team was unavailable.</p></div>
+          <div class="card"><h3>Viewing bookings</h3><p>Books and confirms viewings with qualified buyers.</p></div>
+          <div class="card"><h3>Cold lead revival</h3><p>Re-engages old leads that went quiet.</p></div>
+          <div class="card"><h3>Sales handoff</h3><p>Sends serious buyers to sales with a clean summary.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap cred">
+        <div class="cred-main">
+          <div class="section-kicker">PocketVC</div>
+          <h2>Built for real estate, construction, and operations workflows.</h2>
+          <p>PocketVC has deployed 30+ AI agents across real estate, construction, and operations workflows, including Dubai-based real estate agencies and Gulf built-world partners.</p>
+        </div>
+        <div class="cred-list">
+          <div class="cred-item">Palo Alto venture studio</div>
+          <div class="cred-item">Active across the US and Gulf</div>
+          <div class="cred-item">Real estate, construction, and smart-city workflows</div>
+          <div class="cred-item">Arabic + English capability</div>
+          <div class="cred-item">Custom-built around each client’s process</div>
+          <div class="cred-item">Client owns the system</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sprint">
+      <div class="wrap sprint">
+        <div class="sprint-grid">
+          <div>
+            <div class="section-kicker">First contract</div>
+            <h2>Start with one workflow, not a big AI project.</h2>
+            <p><b>14-Day AI Lead Response Sprint.</b> Test the operator on one lead-response workflow before a full build.</p>
+            <div class="actions">
+              <a class="btn gold js-sprint" href="mailto:chinara@pocketstudio.vc?subject=14-Day%20AI%20Lead%20Response%20Sprint%20Scope" data-event="sprint_scope_click">Request sprint scope</a>
+              <a class="btn ghost js-calendly" href="https://calendly.com/pocketvc/30min" data-event="calendly_click">Book call</a>
+            </div>
+          </div>
+          <div class="sprint-cols">
+            <div class="sprint-col">
+              <h3>Scope</h3>
+              <ul>
+                <li>Map current lead-response process</li>
+                <li>Define qualification questions</li>
+                <li>Build call and WhatsApp follow-up logic</li>
+                <li>Test sample buyer scenarios</li>
+                <li>Prepare full deployment plan</li>
+              </ul>
+            </div>
+            <div class="sprint-col">
+              <h3>Output</h3>
+              <ul>
+                <li>AI operator workflow</li>
+                <li>Call script</li>
+                <li>WhatsApp follow-up logic</li>
+                <li>Qualification rules</li>
+                <li>Viewing booking flow</li>
+                <li>Implementation plan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap final-box">
+        <h2>Want to see how many leads <span data-company>your company</span> may be missing?</h2>
+        <p>Book a 20-minute workflow call to map your current lead flow and see whether the AI operator is worth testing.</p>
+        <a class="btn gold js-calendly" href="https://calendly.com/pocketvc/30min" data-event="calendly_click">Book a 20-minute workflow call</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© PocketVC Studio LLC</span>
+      <span>Private demo page · noindex</span>
+      <span>chinara@pocketstudio.vc</span>
+    </div>
+  </footer>
+
+  <div class="mobile-cta">
+    <a class="btn gold js-calendly" href="https://calendly.com/pocketvc/30min" data-event="calendly_click">Book workflow call</a>
+  </div>
+
+  <script>
+    (function(){
+      const params = new URLSearchParams(window.location.search);
+      const company = params.get('company') || 'your company';
+      document.querySelectorAll('[data-company]').forEach(el => { el.textContent = company; });
+
+      function trackEvent(name, payload){
+        const data = Object.assign({ company: company }, payload || {});
+        try { if (typeof window.gtag === 'function') window.gtag('event', name, data); } catch(e) {}
+        try { if (typeof window.clarity === 'function') window.clarity('event', name); } catch(e) {}
+      }
+      window.trackEvent = trackEvent;
+      trackEvent('page_view');
+
+      function calendlyWithParams(base){
+        const keep = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','account','company'];
+        const url = new URL(base);
+        keep.forEach(k => { if(params.get(k)) url.searchParams.set(k, params.get(k)); });
+        return url.toString();
+      }
+
+      document.querySelectorAll('.js-calendly').forEach(link => {
+        link.href = calendlyWithParams(link.href);
+        link.addEventListener('click', () => trackEvent('calendly_click', { href: link.href }));
+      });
+
+      document.querySelectorAll('[data-event]').forEach(el => {
+        el.addEventListener('click', () => {
+          const ev = el.getAttribute('data-event');
+          if(ev) trackEvent(ev);
+        });
+      });
+
+      document.querySelectorAll('.js-scroll-demo').forEach(el => {
+        el.addEventListener('click', function(e){
+          e.preventDefault();
+          document.querySelector('#demo').scrollIntoView({ behavior:'smooth', block:'start' });
+          trackEvent('cta_click', { target:'demo' });
+        });
+      });
+
+      const sprintLinks = document.querySelectorAll('.js-sprint');
+      sprintLinks.forEach(link => link.addEventListener('click', () => trackEvent('sprint_scope_click')));
+
+      const transcript = document.querySelector('#transcriptDetails');
+      if(transcript){
+        transcript.addEventListener('toggle', () => {
+          if(transcript.open) trackEvent('transcript_open');
+        });
+      }
+
+      let scrolled50 = false;
+      window.addEventListener('scroll', () => {
+        if(scrolled50) return;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if(docHeight > 0 && scrollTop / docHeight >= 0.5){
+          scrolled50 = true;
+          trackEvent('scroll_50');
+        }
+      }, { passive:true });
+
+      const audio = document.querySelector('#demoAudio');
+      const afterAudio = document.querySelector('#afterAudio');
+      const milestones = {25:false,50:false,75:false,100:false};
+      if(audio){
+        audio.addEventListener('play', () => {
+          trackEvent('audio_play');
+          if(afterAudio) afterAudio.classList.add('visible');
+        });
+        audio.addEventListener('timeupdate', () => {
+          if(!audio.duration || !isFinite(audio.duration)) return;
+          const pct = (audio.currentTime / audio.duration) * 100;
+          [25,50,75].forEach(m => {
+            if(pct >= m && !milestones[m]){
+              milestones[m] = true;
+              trackEvent('audio_' + m + '_percent');
+            }
+          });
+        });
+        audio.addEventListener('ended', () => {
+          if(!milestones[100]){
+            milestones[100] = true;
+            trackEvent('audio_complete');
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
