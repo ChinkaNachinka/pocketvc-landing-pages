@@ -533,11 +533,76 @@
     }
 
     .demo-duration {
-      margin: 0;
+      margin: 8px 0 0;
       color: var(--quiet);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: .06em;
+      text-align: center;
+    }
+
+    .audio-progress-row {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 34px minmax(90px, 1fr) 34px;
+      align-items: center;
+      gap: 8px;
+      color: var(--quiet);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 9px;
+    }
+
+    .audio-progress {
+      --played: 0%;
+      width: 100%;
+      height: 16px;
+      margin: 0;
+      padding: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .audio-progress::-webkit-slider-runnable-track {
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(to right, var(--gold) 0 var(--played), rgba(243,239,229,.16) var(--played) 100%);
+    }
+
+    .audio-progress::-webkit-slider-thumb {
+      width: 11px;
+      height: 11px;
+      margin-top: -4px;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      box-shadow: 0 0 0 4px rgba(213,154,73,.13);
+    }
+
+    .audio-progress::-moz-range-track {
+      height: 3px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(243,239,229,.16);
+    }
+
+    .audio-progress::-moz-range-progress {
+      height: 3px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    .audio-progress::-moz-range-thumb {
+      width: 11px;
+      height: 11px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--gold-bright);
+      box-shadow: 0 0 0 4px rgba(213,154,73,.13);
     }
 
     .results-screen {
@@ -1298,7 +1363,12 @@
                   <span class="audio-icon" aria-hidden="true"></span>
                 </button>
               </div>
-              <p class="demo-duration" id="audio-time">0:00 / 1:24</p>
+              <div class="audio-progress-row">
+                <span id="audio-current">0:00</span>
+                <input class="audio-progress" id="audio-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Audio playback position">
+                <span id="audio-total">1:24</span>
+              </div>
+              <p class="demo-duration" id="audio-time">Ready to play</p>
             </div>
 
             <div>
@@ -1310,7 +1380,7 @@
           </div>
 
           <audio id="demo-audio" preload="metadata">
-            <source src="assets/sales-follow-up.mp3" type="audio/mpeg">
+            <source src="assets/Voice%20demo1.wav" type="audio/wav">
           </audio>
         </div>
       </div>
@@ -1514,6 +1584,9 @@
       var waveform = document.getElementById("waveform");
       var action = document.getElementById("audio-action");
       var time = document.getElementById("audio-time");
+      var currentTimeLabel = document.getElementById("audio-current");
+      var totalTimeLabel = document.getElementById("audio-total");
+      var progress = document.getElementById("audio-progress");
       var eyebrow = document.getElementById("demo-eyebrow");
       var title = document.getElementById("demo-title");
       var proof = document.getElementById("demo-proof");
@@ -1523,7 +1596,7 @@
           eyebrow: "SALES + FOLLOW-UP",
           title: "From inquiry to qualified lead",
           proof: "Answers questions, captures the details and follows up until the next step is confirmed.",
-          file: "assets/sales-follow-up.mp3",
+          file: "assets/Voice%20demo1.wav",
           duration: "1:24",
           label: "sales and follow-up"
         },
@@ -1531,8 +1604,8 @@
           eyebrow: "CUSTOMER SERVICE",
           title: "From customer request to resolution",
           proof: "Answers customer questions, takes action and escalates only when a person is needed.",
-          file: "assets/customer-service.mp3",
-          duration: "1:08",
+          file: "assets/Voice%20demo2.wav",
+          duration: "4:13",
           label: "customer service"
         }
       };
@@ -1548,11 +1621,28 @@
         return mins + ":" + secs;
       };
 
+      var resetProgress = function () {
+        progress.value = 0;
+        progress.style.setProperty("--played", "0%");
+        currentTimeLabel.textContent = "0:00";
+        totalTimeLabel.textContent = demos[activeDemo].duration;
+      };
+
+      var updateProgress = function () {
+        if (!hasUsableDuration()) return;
+        var played = Math.min(100, Math.max(0, (audio.currentTime / audio.duration) * 100));
+        progress.value = played;
+        progress.style.setProperty("--played", played + "%");
+        currentTimeLabel.textContent = formatTime(audio.currentTime);
+        totalTimeLabel.textContent = formatTime(audio.duration);
+      };
+
       var setPlaying = function (playing) {
         toggle.setAttribute("aria-pressed", String(playing));
         toggle.setAttribute("aria-label", (playing ? "Pause the " : "Play the ") + demos[activeDemo].label + " demo");
         waveform.classList.toggle("playing", playing);
         action.textContent = playing ? "❚❚ Pause the call" : "▶ Play the call";
+        if (playing) time.textContent = "Playing";
       };
 
       var toggleAudio = function () {
@@ -1567,6 +1657,11 @@
 
       toggle.addEventListener("click", toggleAudio);
       action.addEventListener("click", toggleAudio);
+      progress.addEventListener("input", function () {
+        if (!hasUsableDuration()) return;
+        audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+        updateProgress();
+      });
 
       tabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
@@ -1581,7 +1676,8 @@
           eyebrow.textContent = demos[activeDemo].eyebrow;
           title.textContent = demos[activeDemo].title;
           proof.textContent = demos[activeDemo].proof;
-          time.textContent = "0:00 / " + demos[activeDemo].duration;
+          time.textContent = "Loading audio…";
+          resetProgress();
           toggle.disabled = false;
           action.disabled = false;
           tabs.forEach(function (item) {
@@ -1594,27 +1690,36 @@
       });
 
       audio.addEventListener("play", function () { setPlaying(true); });
-      audio.addEventListener("pause", function () { setPlaying(false); });
+      audio.addEventListener("pause", function () {
+        setPlaying(false);
+        if (audio.currentTime > 0 && !audio.ended) time.textContent = "Paused";
+      });
       audio.addEventListener("ended", function () {
         setPlaying(false);
         audio.currentTime = 0;
+        resetProgress();
+        time.textContent = "Replay the call";
       });
       audio.addEventListener("timeupdate", function () {
-        if (hasUsableDuration()) {
-          time.textContent = formatTime(audio.currentTime) + " / " + formatTime(audio.duration);
-        }
+        updateProgress();
       });
       audio.addEventListener("loadedmetadata", function () {
         if (hasUsableDuration()) {
-          time.textContent = "0:00 / " + formatTime(audio.duration);
+          totalTimeLabel.textContent = formatTime(audio.duration);
+          time.textContent = "Ready to play";
         }
+      });
+      audio.addEventListener("canplay", function () {
+        toggle.disabled = false;
+        action.disabled = false;
+        if (audio.currentTime === 0) time.textContent = "Ready to play";
       });
       audio.addEventListener("error", function () {
         setPlaying(false);
         toggle.disabled = true;
         action.disabled = true;
         toggle.setAttribute("aria-label", "Demo audio unavailable");
-        time.textContent = "Demo audio unavailable";
+        time.textContent = demos[activeDemo].label.charAt(0).toUpperCase() + demos[activeDemo].label.slice(1) + " audio has not been uploaded yet";
       });
 
       document.querySelectorAll(".marker-wrap").forEach(function (wrapper) {
